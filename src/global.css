@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:focus {
+  outline: transparent;
+}
+
 :root {
   --blue: #4ea8d3;
   --purple: #8284fa;
@@ -25,7 +29,7 @@ body {
   background-color: var(--gray-600);
 }
 
-body, input {
+body, input, button {
  font-family: 'Inter';
  font-weight: 400;
  font-size: 1rem;
