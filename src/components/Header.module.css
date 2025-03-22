@@ -1,0 +1,17 @@
+.header {
+  background-color: var(--gray-700);
+  color: var(--blue);
+  font-size: 2.5rem;
+  font-weight: 900;
+
+  display: flex;
+  gap: 0.875rem;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  padding-block: 4.5rem 5rem;
+}
+
+.header span:nth-child(2) {
+  color: var(--purple-dark);
+}
