@@ -1,10 +1,13 @@
 import clipboard from '../assets/clipboard.svg'
 
 import styles from './CreatedTasks.module.css'
-import { Task } from './Task'
+import { Task, TaskType } from './Task'
 
 export function CreatedTasks() {
-  const tasks = [1, 2, 3, 4, 5]
+  const tasks: TaskType[] = [
+    { id: '1', content: 'Task 01' },
+    { id: '2', content: 'Task 02' },
+  ]
 
   return (
     <>
@@ -21,7 +24,7 @@ export function CreatedTasks() {
       <main className={styles.main}>
         {
           tasks.length ?
-          tasks.map(() => <Task />) :
+          tasks.map((task) => <Task key={task.id} task={task} />) :
           (
             <div className={styles.noTasks}>
               <img src={clipboard} alt="ícone de prancheta" />

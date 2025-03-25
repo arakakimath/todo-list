@@ -47,7 +47,6 @@
 }
 
 .task p {
-  color: var(--gray-100);
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.4;
@@ -55,4 +54,14 @@
 
 .task + .task {
   margin-top: .75rem;
+}
+
+.lineThrough {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.none {
+  text-decoration: none;
+  color: var(--gray-100);
 }
