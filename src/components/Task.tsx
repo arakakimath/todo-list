@@ -6,17 +6,21 @@ import { ChangeEvent, useState } from 'react'
 export interface TaskType {
   id: string
   content: string
+  completed: boolean
 }
 
 export interface TaskProps {
   task: TaskType
+  onDeleteTask: (id: string) => void
+  onToggleCheckbox: (id: string) => void
 }
 
-export function Task({ task, onDeleteTask }) {
+export function Task({ task, onDeleteTask, onToggleCheckbox }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
   function handleCheckboxSelection(event: ChangeEvent<HTMLInputElement>) {
     setIsChecked(event.target.checked)
+    onToggleCheckbox(task.id)
   }
 
   function handleDeleteTask() {

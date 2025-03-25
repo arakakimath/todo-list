@@ -6,11 +6,16 @@ import { Task } from './Task'
 
 export function CreatedTasks() {
   const [tasks, setTasks] = useState([
-    { id: '1', content: 'Task 01' },
-    { id: '2', content: 'Task 02' },
+    { id: '1', content: 'Task 01', completed: false },
+    { id: '2', content: 'Task 02', completed: false },
   ])
 
   const [newTaskText, setNewTaskText] = useState('')
+
+  const numberOfCompletedTasks = tasks.reduce((acc, task) => {
+    if (task.completed) acc++
+    return acc
+  }, 0)
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -18,6 +23,7 @@ export function CreatedTasks() {
     setTasks([...tasks, {
       id: (new Date()).toString(),
       content: newTaskText,
+      completed: false,
     }])
     setNewTaskText('')
   }
@@ -37,11 +43,20 @@ export function CreatedTasks() {
     setTasks(tasksWithoutDeletedOne)
   }
 
+  const toggleCheckbox = (id: string) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) return { ...task, completed: !task.completed }
+      return task
+    })
+
+    setTasks(updatedTasks)
+  }
+
   return (
     <>
       <form onSubmit={handleFormSubmit} className={styles.form}>
-        <input 
-          type='text' 
+        <input
+          type='text'
           name='newTask'
           value={newTaskText}
           onChange={handleNewTaskChange}
@@ -58,26 +73,31 @@ export function CreatedTasks() {
       <header className={styles.header}>
         <div>
           <span>Tarefas criadas</span>
-          <span>{0}</span>
+          <span>{tasks.length}</span>
         </div>
         <div>
           <span>Concluídas</span>
-          <span>{0}</span>
+          <span>{numberOfCompletedTasks} de {tasks.length}</span>
         </div>
       </header>
       <main className={styles.main}>
         {
           tasks.length ?
-          tasks.map((task) => <Task key={task.id} task={task} onDeleteTask={deleteTask} />) :
-          (
-            <div className={styles.noTasks}>
-              <img src={clipboard} alt="ícone de prancheta" />
-              <div>
-                <strong>Você ainda não tem tarefas cadastradas</strong>
-                <span>Crie tarefas e organize seus itens a fazer</span>
+            tasks.map((task) => <Task
+              key={task.id}
+              task={task}
+              onDeleteTask={deleteTask}
+              onToggleCheckbox={toggleCheckbox}
+            />) :
+            (
+              <div className={styles.noTasks}>
+                <img src={clipboard} alt="ícone de prancheta" />
+                <div>
+                  <strong>Você ainda não tem tarefas cadastradas</strong>
+                  <span>Crie tarefas e organize seus itens a fazer</span>
+                </div>
               </div>
-            </div>
-          ) 
+            )
         }
       </main>
     </>
