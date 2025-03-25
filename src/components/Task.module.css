@@ -13,6 +13,7 @@
 .task > div {
   width: 1.5rem;
   height: 1.5rem;
+  padding-top: 0.1rem;
 }
 
 .task > div > div {
@@ -21,6 +22,14 @@
   border: 1px solid var(--blue);
   border-radius: 1rem;
   position: relative;
+}
+
+.task > div > div:hover {
+  background-color: var(--blue-dark);
+}
+
+.task > div > div:has(:checked):hover {
+  background-color: var(--purple);
 }
 
 .task > div > div:has(:checked) {
@@ -43,7 +52,13 @@
   border: 0;
   color: var(--gray-300);
   cursor: pointer;
-  padding-bottom: -5rem;
+  padding-top: 0.1rem;
+  border-radius: 8px;
+}
+
+.task button:hover {
+  color: var(--red-danger);
+  background-color: var(--gray-400);
 }
 
 .task p {
