@@ -1,0 +1,57 @@
+.task {
+  display: flex;
+  padding: 1rem;
+  gap: .75rem;
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  border: 1px solid var(--gray-400);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.task > div {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.task > div > div {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  border: 1px solid var(--blue);
+  border-radius: 1rem;
+  position: relative;
+}
+
+.task > div > div:has(:checked) {
+  background-image: url(../assets/vector.svg);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 50%;
+  background-color: var(--purple-dark);
+  border: 0;
+}
+
+.task input {
+  all: unset;
+  position: absolute;
+  inset: 0;
+}
+
+.task button {
+  background-color: inherit;
+  border: 0;
+  color: var(--gray-300);
+  cursor: pointer;
+  padding-bottom: -5rem;
+}
+
+.task p {
+  color: var(--gray-100);
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.task + .task {
+  margin-top: .75rem;
+}

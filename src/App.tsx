@@ -1,4 +1,5 @@
 import styles from './App.module.css'
+import { CreatedTasks } from './components/CreatedTasks'
 import { Header } from './components/Header'
 import { NewTask } from './components/NewTask'
 
@@ -8,7 +9,8 @@ export function App() {
   return (
     <>
       <Header />
-      <NewTask/>
+      <NewTask />
+      <CreatedTasks />
     </>
   )
 }
