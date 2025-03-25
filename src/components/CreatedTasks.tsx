@@ -1,16 +1,54 @@
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 import clipboard from '../assets/clipboard.svg'
 
 import styles from './CreatedTasks.module.css'
-import { Task, TaskType } from './Task'
+import { Task } from './Task'
 
 export function CreatedTasks() {
-  const tasks: TaskType[] = [
+  const [tasks, setTasks] = useState([
     { id: '1', content: 'Task 01' },
     { id: '2', content: 'Task 02' },
-  ]
+  ])
+
+  const [newTaskText, setNewTaskText] = useState('')
+
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault()
+
+    setTasks([...tasks, {
+      id: (new Date()).toString(),
+      content: newTaskText,
+    }])
+    setNewTaskText('')
+  }
+
+  const handleNewTaskChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.target.setCustomValidity('')
+    setNewTaskText(event.target.value)
+  }
+
+  const handleNewInvalidTask = (event: InvalidEvent<HTMLInputElement>) => {
+    event.target.setCustomValidity('Esse campo é obrigatório!')
+  }
 
   return (
     <>
+      <form onSubmit={handleFormSubmit} className={styles.form}>
+        <input 
+          type='text' 
+          name='newTask'
+          value={newTaskText}
+          onChange={handleNewTaskChange}
+          required
+          onInvalid={handleNewInvalidTask}
+          id='newTask'
+          placeholder='Adicione uma nova tarefa'
+        />
+        <button type='submit'>
+          Criar
+          <div><span>+</span></div>
+        </button>
+      </form>
       <header className={styles.header}>
         <div>
           <span>Tarefas criadas</span>
