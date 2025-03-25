@@ -31,6 +31,12 @@ export function CreatedTasks() {
     event.target.setCustomValidity('Esse campo é obrigatório!')
   }
 
+  const deleteTask = (id: string) => {
+    const tasksWithoutDeletedOne = tasks.filter(task => task.id !== id)
+
+    setTasks(tasksWithoutDeletedOne)
+  }
+
   return (
     <>
       <form onSubmit={handleFormSubmit} className={styles.form}>
@@ -62,7 +68,7 @@ export function CreatedTasks() {
       <main className={styles.main}>
         {
           tasks.length ?
-          tasks.map((task) => <Task key={task.id} task={task} />) :
+          tasks.map((task) => <Task key={task.id} task={task} onDeleteTask={deleteTask} />) :
           (
             <div className={styles.noTasks}>
               <img src={clipboard} alt="ícone de prancheta" />

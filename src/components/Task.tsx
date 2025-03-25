@@ -12,11 +12,15 @@ export interface TaskProps {
   task: TaskType
 }
 
-export function Task({ task }) {
+export function Task({ task, onDeleteTask }) {
   const [isChecked, setIsChecked] = useState(false)
 
   function handleCheckboxSelection(event: ChangeEvent<HTMLInputElement>) {
     setIsChecked(event.target.checked)
+  }
+
+  function handleDeleteTask() {
+    onDeleteTask(task.id)
   }
 
   return (
@@ -31,7 +35,12 @@ export function Task({ task }) {
         </div>
       </div>
       <p className={isChecked ? styles.lineThrough : styles.none}>{task.content}</p>
-      <button title='Deletar tarefa'><Trash size={20} /></button>
+      <button 
+        title='Deletar tarefa'
+        onClick={handleDeleteTask}
+      >
+        <Trash size={20} />
+      </button>
     </div>
   )
 }
